@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include "Menu.h"
 using namespace sf;
 
@@ -6,36 +7,32 @@ using namespace sf;
 Menu::Menu(float width, float height)
 {
 
-	if (!font.loadFromFile("arial.ttf"))
+	if (!font.loadFromFile("peppermint.ttf"))
 	{
 
 	}
 
 
 	menuText[0].setFont(font);
-	menuText[0].setFillColor(Color::White);
-	menuText[0].setPosition(Vector2f(width / 2, height /(NR_ITEMS+2) * 1));
+	menuText[0].setFillColor(Color::Yellow);
+	menuText[0].setCharacterSize(70);
+	menuText[0].setPosition(Vector2f(width / 3, height /(NR_ITEMS+2) * 2));
 	menuText[0].setString("Play");
 
 
 	menuText[1].setFont(font);
-	menuText[1].setFillColor(Color::Black);
-	menuText[1].setPosition(Vector2f(width / 2, height / (NR_ITEMS + 2) * 2));
-	menuText[1].setString("Options");
+	menuText[1].setFillColor(Color::White);
+	menuText[1].setCharacterSize(60);
+	menuText[1].setPosition(Vector2f(width / 7, height / (NR_ITEMS+2)*3));
+	menuText[1].setString("High-score");
 
 	menuText[2].setFont(font);
-	menuText[2].setFillColor(Color::Black);
-	menuText[2].setPosition(Vector2f(width / 2, height / (NR_ITEMS + 2) * 3));
-	menuText[2].setString("High-score");
+	menuText[2].setFillColor(Color::White);
+	menuText[2].setCharacterSize(70);
+	menuText[2].setPosition(Vector2f(width / 3, height / (NR_ITEMS + 2) * 4));
+	menuText[2].setString("Exit");
 
-
-	menuText[3].setFont(font);
-	menuText[3].setFillColor(Color::Black);
-	menuText[3].setPosition(Vector2f(width / 2, height / (NR_ITEMS + 2) * 4));
-	menuText[3].setString("Exit");
-
-
-	selectItem = 0; // Item-ul selectat
+	selectItem = -1;
 }
 
 
@@ -56,18 +53,23 @@ void Menu::MoveUp()
 {
 	if (selectItem - 1 >= 0)
 	{
-		menuText[selectItem].setFillColor(Color::Black);
-		selectItem--;
 		menuText[selectItem].setFillColor(Color::White);
+		selectItem--;
+		menuText[selectItem].setFillColor(Color::Yellow);
 	}
+
+
 }
 
 void Menu::MoveDown()
 {
 	if (selectItem +1 < NR_ITEMS)
 	{
-		menuText[selectItem].setFillColor(Color::Black);
-		selectItem++;
 		menuText[selectItem].setFillColor(Color::White);
+		selectItem++;
+		menuText[selectItem].setFillColor(Color::Yellow);
 	}
+
+	
+
 }

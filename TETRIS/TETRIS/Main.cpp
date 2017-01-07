@@ -1,105 +1,168 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <ctime>
+#include <cstdlib>
+#include <SFML/Window.hpp>
 #include <iostream>
 #include "Menu.h"
 #include "Shapes.h"
+#include "ShapesFunction.h"
+
+
 using namespace sf;
 using namespace std;
 
 
+/*
 void fillShapesMatrix(bool matrix[4][4], int shape, int rotatie)
 {
-	int i, j;
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 4; j++)
-			matrix[i][j] = shapesM[shape][rotatie][i][j];
+int i, j;
+for (int i = 0; i < 4; i++)
+for (int j = 0; j < 4; j++)
+matrix[i][j] = shapesM[shape][rotatie][i][j];
 }
+
 
 void generateShapes(bool matrix[4][4], int &color, int &rotatie, int &shape)
 {
-	color = rand() % 6;
-	rotatie = rand() % 4;
-	shape = rand() % 7;
-	fillShapesMatrix(matrix, shape, rotatie);
+color = rand() % 6;
+rotatie = rand() % 4;
+shape = rand() % 7;
+fillShapesMatrix(matrix, shape, rotatie);
 }
 
+*/
 
 
 
 
 int main()
 {
-
-	bool matrix[4][4];
-	int boardGame[16][10] = { 0 };
-	int rotatie, shape, color;
-
-	Vector2f shapePos, windowSize;
-
-
-
-	RenderWindow window(VideoMode(450, 700), "TETRIS");
-	windowSize.x = (float)window.getSize().x;
-	windowSize.y = (float)window.getSize().y;
 	
-	shapePos.x = windowSize.x / BOARD_GAME_SIZE/ 3;
-	shapePos.y = 0;
-
+	RenderWindow window(VideoMode(450, 700), "TETRIS");
+	window.setFramerateLimit(30);
 
 	Menu menu(window.getSize().x, window.getSize().y);
 
-	Texture tbackground,tshape;
-	tbackground.loadFromFile("back.jpg");
+	ShapesFunction shapesFunction;
+	bool gameOver = 0;
+	int shapeDown = 0;
+	int opMenu = -1;
 
+
+	Texture tbackground, tshape;
+	tbackground.loadFromFile("back2.jpg");
 	Sprite background(tbackground);
 
-	
 
+	
 	while (window.isOpen())
 	{
+		
 		Event windowEvent;
+
 		while (window.pollEvent(windowEvent))
 		{
 
-			switch (windowEvent.type)
-			{
-			case Event::KeyReleased:
-				switch (windowEvent.key.code)
-				{
-				case Keyboard::Up:
-					menu.MoveUp();
-					break;
 
-				case Keyboard::Down:
+			if (Event::KeyPressed == windowEvent.type)
+			{
+
+				//---Pentru meniu---
+
+				if(windowEvent.key.code==Keyboard::Up) 
+					menu.MoveUp();
+
+				if (windowEvent.key.code == Keyboard::Down) 
 					menu.MoveDown();
-					break;
+
+				if (windowEvent.key.code == Keyboard::Return)
+				{
+					if (menu.Item() == 0)
+						opMenu = 1;
+					if (menu.Item() == 1)
+						opMenu = 2;
+					if (menu.Item() == 2)
+						window.close();
 				}
 
-				break;
+				if (windowEvent.key.code == Keyboard::BackSpace)
+					opMenu = 4;
+				
 
-			case Event::Closed:
-				window.close();
-				break;
+
+
+				//--Pentru piese---
+
+
+				if (windowEvent.key.code == Keyboard::RControl)
+				{
+					ShapesFunction shp = shapesFunction;
+					shapesFunction.rotateShape();
+					
+				}
+
+				
+
+
 			}
 
-			window.clear();
-			
-			
+			if (windowEvent.type == Event::Closed)
+				window.close();
+				
+
+		}
 
 
-			generateShapes(matrix, color, rotatie, shape);
-			for (int i = 0; i < 4; i++)
-				for (int j = 0; j < 4; j++)
-					if (matrix[i][j] == 1)
-						drawShapes(window, (j + shapePos.x)*BOARD_GAME_SIZE, (i + shapePos.y)*BOARD_GAME_SIZE, shapeColors[color]);
+
+		if (opMenu == -1)
+		{
+			window.draw(background);
+			menu.drawMenu(window);
+		}
+		
+
+
+		if (opMenu == 1)
+		{
+			
+
+			window.draw(background);
+			shapesFunction.drawActualShape(window);
+
+			if (shapeDown <= 30)
+				shapeDown++;
+			else
+				shapeDown = 1;
+		}
+		
+
+
+		if (opMenu == 2)
+			window.clear(Color::Black);
+		
+
+		
+		if (opMenu == 3)
+			window.close();
+
+		if (opMenu == 4)
+		{
+			window.draw(background);
+			menu.drawMenu(window);
+		}
+
+		/*generateShapes(matrix, color, rotatie, shape);
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+				if (matrix[i][j] == 1)
+					drawShapes(window, (j + shapePos.x)*BOARD_GAME_SIZE, (i + shapePos.y)*BOARD_GAME_SIZE, shapeColors[color]);*/
+
 
 
 		
-			//window.draw(background);
-			//menu.drawMenu(window);
-			window.display();
-
-		}
+		window.display();
 	}
 
-
+	return 0;
 }
