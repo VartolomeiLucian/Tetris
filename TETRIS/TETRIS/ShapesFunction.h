@@ -39,6 +39,16 @@ public:
 	}
 
 
+	void moveShape(int x, int y)
+	{
+		if (ValidShapeRotate(x, y) != 0)
+		{
+			Xposition = Xposition + x;
+			Yposition = Yposition + y;
+		}
+	}
+
+
 	void rotateShape()
 	{
 		int auxIdx = shapeIdx;
@@ -78,6 +88,23 @@ public:
 				
 	}
 
+
+
+	int returnPositionX()
+	{
+		return Xposition;
+	}
+
+	int(returnPositionY())
+	{
+		return Yposition;
+	}
+
+
+	int returnShape(int x, int y)
+	{
+		return matrixShape[y][x];
+	}
 	
 };
 

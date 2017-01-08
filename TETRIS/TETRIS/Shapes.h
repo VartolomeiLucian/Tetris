@@ -5,11 +5,9 @@ using namespace std;
 using namespace sf;
 
 
-#define BOARD_GAME_SIZE 20
-#define BOARD_GAME_HEIGHT 25
+#define BOARD_GAME_SIZE 27
+#define BOARD_GAME_HEIGHT 22
 #define BOARD_GAME_WIDTH 12
-
-
 
 
 

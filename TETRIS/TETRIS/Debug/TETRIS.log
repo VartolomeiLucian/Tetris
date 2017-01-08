@@ -1,10 +1,12 @@
 ﻿  Main.cpp
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(72): warning C4101: 'y': unreferenced local variable
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(72): warning C4101: 'x': unreferenced local variable
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(87): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(82): warning C4101: 'y': unreferenced local variable
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(82): warning C4101: 'x': unreferenced local variable
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\boardgame.h(102): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 e:\anul i\semestrul i 2016\tetris project\tetris\tetris\main.cpp(45): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
   Generating Code...
   Skipping... (no relevant changes detected)
   ShapesFunction.cpp
+  BoardGame.cpp
   TETRIS.vcxproj -> E:\Anul I\Semestrul I 2016\Tetris Project\TETRIS\Debug\TETRIS.exe
   TETRIS.vcxproj -> E:\Anul I\Semestrul I 2016\Tetris Project\TETRIS\Debug\TETRIS.pdb (Full PDB)

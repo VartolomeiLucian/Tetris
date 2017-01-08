@@ -21,8 +21,6 @@ for (int i = 0; i < 4; i++)
 for (int j = 0; j < 4; j++)
 matrix[i][j] = shapesM[shape][rotatie][i][j];
 }
-
-
 void generateShapes(bool matrix[4][4], int &color, int &rotatie, int &shape)
 {
 color = rand() % 6;
@@ -30,7 +28,6 @@ rotatie = rand() % 4;
 shape = rand() % 7;
 fillShapesMatrix(matrix, shape, rotatie);
 }
-
 */
 
 
@@ -38,7 +35,7 @@ fillShapesMatrix(matrix, shape, rotatie);
 
 int main()
 {
-	
+
 	RenderWindow window(VideoMode(450, 700), "TETRIS");
 	window.setFramerateLimit(30);
 
@@ -49,16 +46,21 @@ int main()
 	int shapeDown = 0;
 	int opMenu = -1;
 
+	Texture tbackground;
+	Texture tbackgroundBoardGame;
 
-	Texture tbackground, tshape;
 	tbackground.loadFromFile("back2.jpg");
+	tbackgroundBoardGame.loadFromFile("Backboardgamescore.png");
+
+
 	Sprite background(tbackground);
-
-
+	Sprite backgroundBoarGame(tbackgroundBoardGame);
 	
+
+
 	while (window.isOpen())
 	{
-		
+
 		Event windowEvent;
 
 		while (window.pollEvent(windowEvent))
@@ -70,10 +72,10 @@ int main()
 
 				//---Pentru meniu---
 
-				if(windowEvent.key.code==Keyboard::Up) 
+				if (windowEvent.key.code == Keyboard::Up)
 					menu.MoveUp();
 
-				if (windowEvent.key.code == Keyboard::Down) 
+				if (windowEvent.key.code == Keyboard::Down)
 					menu.MoveDown();
 
 				if (windowEvent.key.code == Keyboard::Return)
@@ -88,7 +90,7 @@ int main()
 
 				if (windowEvent.key.code == Keyboard::BackSpace)
 					opMenu = 4;
-				
+
 
 
 
@@ -99,17 +101,17 @@ int main()
 				{
 					ShapesFunction shp = shapesFunction;
 					shapesFunction.rotateShape();
-					
+
 				}
 
-				
+
 
 
 			}
 
 			if (windowEvent.type == Event::Closed)
 				window.close();
-				
+
 
 		}
 
@@ -120,14 +122,13 @@ int main()
 			window.draw(background);
 			menu.drawMenu(window);
 		}
-		
+
 
 
 		if (opMenu == 1)
 		{
-			
 
-			window.draw(background);
+			window.draw(backgroundBoarGame);
 			shapesFunction.drawActualShape(window);
 
 			if (shapeDown <= 30)
@@ -135,14 +136,14 @@ int main()
 			else
 				shapeDown = 1;
 		}
-		
+
 
 
 		if (opMenu == 2)
 			window.clear(Color::Black);
-		
 
-		
+
+
 		if (opMenu == 3)
 			window.close();
 
@@ -154,15 +155,19 @@ int main()
 
 		/*generateShapes(matrix, color, rotatie, shape);
 		for (int i = 0; i < 4; i++)
-			for (int j = 0; j < 4; j++)
-				if (matrix[i][j] == 1)
-					drawShapes(window, (j + shapePos.x)*BOARD_GAME_SIZE, (i + shapePos.y)*BOARD_GAME_SIZE, shapeColors[color]);*/
+		for (int j = 0; j < 4; j++)
+		if (matrix[i][j] == 1)
+		drawShapes(window, (j + shapePos.x)*BOARD_GAME_SIZE, (i + shapePos.y)*BOARD_GAME_SIZE, shapeColors[color]);*/
 
 
 
-		
+
 		window.display();
 	}
 
 	return 0;
 }
+
+
+
+
