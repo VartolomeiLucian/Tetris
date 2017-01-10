@@ -23,8 +23,8 @@ Menu::Menu(float width, float height)
 	menuText[1].setFont(font);
 	menuText[1].setFillColor(Color::White);
 	menuText[1].setCharacterSize(60);
-	menuText[1].setPosition(Vector2f(width / 7, height / (NR_ITEMS+2)*3));
-	menuText[1].setString("High-score");
+	menuText[1].setPosition(Vector2f(width / 5, height / (NR_ITEMS+2)*3));
+	menuText[1].setString("Instructions");
 
 	menuText[2].setFont(font);
 	menuText[2].setFillColor(Color::White);

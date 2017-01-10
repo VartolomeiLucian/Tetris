@@ -6,6 +6,9 @@
 using namespace std;
 using namespace sf;
 
+
+
+
 class ShapesFunction
 {
 private:
@@ -13,28 +16,36 @@ private:
 	int matrixShape[4][4]; //matricea in care am forma
 	int Xposition;
 	int Yposition;
-	int color;
+	int color=0;
+	
+	
 
 	void fillShapesMatrix()
 	{
-		for (int i = 0; i < 4; i++)
-			for (int m = 0; m < 4; m++)
-				matrixShape[i][m] = allShapes[shapeIdx][i][m];
+		int i;
+		int j;
+
+		for (i = 0; i < 4; i++)
+			for (j = 0; j < 4; j++)
+				matrixShape[i][j] = allShapes[shapeIdx][i][j];
 	}
 
 public:
 	ShapesFunction()
 	{
+		
 		Xposition = 2;
 		Yposition = -4;
 		generateShapes();
+	
 	}
+	
 
 	void generateShapes()
 	{
-		int shapeG = rand() % 7;
-		shapeIdx = (ShapeIndx)shapeG;
+		int shapeG = rand() % 28;
 		color = rand() % 6;
+		shapeIdx = (ShapeIndx)shapeG;
 		fillShapesMatrix();
 	}
 
@@ -49,6 +60,24 @@ public:
 	}
 
 
+
+
+	bool ValidShapeRotate(int axaX = 0, int axaY = 0)
+	{
+		int x;
+		int y;
+
+		for (y = 0; y < 4; y++)
+			for (x = 0; x < 4; x++)
+				if ((matrixShape[y][x] != 0 && (Xposition + x + axaX >= BOARD_GAME_WIDTH || Xposition + axaX < 0)) || (matrixShape[y][x] && (Yposition + y + axaY > BOARD_GAME_HEIGHT)))
+					return 0;
+
+
+		return 1;
+	}
+
+	
+	
 	void rotateShape()
 	{
 		int auxIdx = shapeIdx;
@@ -64,29 +93,32 @@ public:
 		}
 	}
 
-	bool ValidShapeRotate(int axaX = 0, int axaY = 0)
+
+	void matrixBoarG(int matrixBG[4][4])
 	{
 
-		for (int y = 0; y < 4; y++)
-			for (int x = 0; x < 4; x++)
-				if ((matrixShape[y][x] != 0 && (Xposition + x + axaX >= BOARD_GAME_WIDTH || Xposition + axaX < 0)) || (matrixShape[y][x] && (Yposition + y + axaY > BOARD_GAME_HEIGHT)))
-					return 0;
+		int i;
+		int j;
 
-
-		return true;
+		for( i=0;i<4;i++)
+			for(j=0;j<4;j++)
+				matrixBG[i][j]==matrixShape[i][j];
 	}
-
-	void drawActualShape(sf::RenderWindow & window)
+	
+	
+	void drawActualShape(RenderWindow &window)
 	{
 
 		int x, y;
-
-		for (int y = 0; y < 4; y++)
-			for (int x = 0; x < 4; x++)
+	
+		for (y = 0; y < 4; y++)
+			for (x = 0; x < 4; x++)
 				if (matrixShape[y][x])
 					drawShapes(window, (x + Xposition) * BOARD_GAME_SIZE, (y + Yposition) * BOARD_GAME_SIZE, shapeColors[color]);
+					
 				
 	}
+
 
 
 
@@ -95,7 +127,7 @@ public:
 		return Xposition;
 	}
 
-	int(returnPositionY())
+	int returnPositionY()
 	{
 		return Yposition;
 	}

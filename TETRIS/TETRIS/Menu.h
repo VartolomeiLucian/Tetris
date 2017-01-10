@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#define NR_ITEMS 4
+#define NR_ITEMS 3
 using namespace sf;
 
 
