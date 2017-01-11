@@ -1,7 +1,9 @@
 ﻿  Main.cpp
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(107): warning C4553: '==': operator has no effect; did you intend '='?
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(119): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\boardgame.h(80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\main.cpp(50): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\boardgame.h(160): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\main.cpp(28): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  BoardGame.cpp
   TETRIS.vcxproj -> E:\Anul I\Semestrul I 2016\Tetris Project\TETRIS\Debug\TETRIS.exe
   TETRIS.vcxproj -> E:\Anul I\Semestrul I 2016\Tetris Project\TETRIS\Debug\TETRIS.pdb (Full PDB)

@@ -11,7 +11,7 @@ using namespace sf;
 
 
 
-int allShapes[][4][4]=
+int allShapes[28][4][4]=
 {
 	// O
 		{ { 0,0,0,0 },

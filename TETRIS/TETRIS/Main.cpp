@@ -12,32 +12,9 @@
 #include <fstream>
 
 
+
 using namespace sf;
 using namespace std;
-
-
-ofstream f("HighScore.txt");
-
-/*
-void fillShapesMatrix(bool matrix[4][4], int shape, int rotatie)
-{
-int i, j;
-for (int i = 0; i < 4; i++)
-for (int j = 0; j < 4; j++)
-matrix[i][j] = shapesM[shape][rotatie][i][j];
-}
-
-
-void generateShapes(bool matrix[4][4], int &color, int &rotatie, int &shape)
-{
-color = rand() % 6;
-rotatie = rand() % 4;
-shape = rand() % 7;
-fillShapesMatrix(matrix, shape, rotatie);
-}
-
-*/
-
 
 
 
@@ -47,15 +24,19 @@ int main()
 	RenderWindow window(VideoMode(500, 730), "TETRIS");
 	window.setFramerateLimit(30);
 
+	
 	Menu menu(window.getSize().x, window.getSize().y);
 	BoardGame boardGame;
 	ShapesFunction shapesFunction;
+
+	
 	int shapeDown = 0;
-	int opMenu =-1;
+	int opMenu = -1;
 	int colorShape = 0;
 	int color = 0;
 	int colorShapeBoardGame = 0;
 	int ok = 1;
+	int speedShapeDown = 30;
 
 
 	// Background:
@@ -65,7 +46,7 @@ int main()
 	Texture tgameOver;
 	Texture tinstructions;
 
-	tbackground.loadFromFile("back2.jpg");
+	tbackground.loadFromFile("BackMenu.png");
 	tbackgroundBoardGame.loadFromFile("Backboardgamescore.png");
 	tgameOver.loadFromFile("GameOver.png");
 	tinstructions.loadFromFile("Instructions.png");
@@ -75,22 +56,22 @@ int main()
 	Sprite gameOver(tgameOver);
 	Sprite instructions(tinstructions);
 
-	
 
 
 	while (window.isOpen())
 	{
+	
 
 		Event windowEvent;
 
 		while (window.pollEvent(windowEvent))
 		{
-
+			
 
 			if (Event::KeyPressed == windowEvent.type)
 			{
 
-				//---Pentru meniu---
+				//Pentru meniu---
 
 				if (windowEvent.key.code == Keyboard::Up)
 					menu.MoveUp();
@@ -108,12 +89,18 @@ int main()
 						window.close();
 				}
 
-				
-				cout << menu.Item()<<" "<<opMenu << endl;
 
-				if (windowEvent.key.code == Keyboard::BackSpace)
-					opMenu = 4;
+		
+				if (windowEvent.key.code == Keyboard::Escape)
+					opMenu = -1;
+
+
+			
+
+				if (windowEvent.key.code == Keyboard::R) 
+					opMenu = 1;
 				
+
 
 				//--Pentru piese---
 
@@ -129,6 +116,7 @@ int main()
 
 				if (windowEvent.key.code == Keyboard::Right)
 				{
+					
 					ShapesFunction shp = shapesFunction;
 					shapesFunction.moveShape(1, 0);
 					if (boardGame.Collision(shapesFunction) != 0)
@@ -136,21 +124,22 @@ int main()
 				}
 
 
+
 				if (windowEvent.key.code == Keyboard::Left)
 				{
+					
 					ShapesFunction shp = shapesFunction;
 					shapesFunction.moveShape(-1, 0);
 					if (boardGame.Collision(shapesFunction) != 0)
 						shapesFunction = shp;
 				}
-
 			}
 
 			if (windowEvent.type == Event::Closed)
 				window.close();
 		}
 
-
+		//Optiuni Meniu----------------------
 
 		if (opMenu == -1)
 		{
@@ -159,29 +148,36 @@ int main()
 		}
 
 
-
-
 		if (opMenu == 1)
-		{
-
-			if (shapeDown % 30 == 0)
+		{	
+			
+			
+			if (shapeDown % speedShapeDown == 0)
 				shapesFunction.moveShape(0, 1);
 
 			if (boardGame.Collision(shapesFunction))
 			{
 				boardGame.addShape(shapesFunction, color);
+				boardGame.destroyFullLines(s, l, ok);
+				
 				shapesFunction = ShapesFunction();
 			}
+
+
+
+			//Draw on Board Game
 
 			window.draw(backgroundBoarGame);
 			boardGame.drawOnBoardGame(window);
 			shapesFunction.drawActualShape(window);
-			
+		
 
+			
 			if (shapeDown <= 30)
 				shapeDown++;
 			else
 				shapeDown = 1;
+
 
 			if (Event::KeyPressed == windowEvent.type)
 				if (windowEvent.key.code == Keyboard::RShift)
@@ -192,24 +188,23 @@ int main()
 
 				}
 
+
+			if (boardGame.fullBoardGame() != 0)
+				window.draw(gameOver);
+
+			
 		}
-		
+
+
 
 
 		if (opMenu == 2)
 			window.draw(instructions);
 
 		if (opMenu == 3)
-			//window.close();
-			window.draw(instructions);
+			window.close();
 
 
-		if (opMenu == 4)
-		{
-			window.draw(background);
-			menu.drawMenu(window);
-		}
-		
 
 		window.display();
 	}

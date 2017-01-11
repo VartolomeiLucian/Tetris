@@ -16,20 +16,20 @@ Menu::Menu(float width, float height)
 	menuText[0].setFont(font);
 	menuText[0].setFillColor(Color::Yellow);
 	menuText[0].setCharacterSize(70);
-	menuText[0].setPosition(Vector2f(width / 3, height /(NR_ITEMS+2) * 2));
+	menuText[0].setPosition(Vector2f(width / 4, height /(NR_ITEMS+2)*2));
 	menuText[0].setString("Play");
 
 
 	menuText[1].setFont(font);
 	menuText[1].setFillColor(Color::White);
 	menuText[1].setCharacterSize(60);
-	menuText[1].setPosition(Vector2f(width / 5, height / (NR_ITEMS+2)*3));
+	menuText[1].setPosition(Vector2f(width / 4, height / (NR_ITEMS+3)*3));
 	menuText[1].setString("Instructions");
 
 	menuText[2].setFont(font);
 	menuText[2].setFillColor(Color::White);
 	menuText[2].setCharacterSize(70);
-	menuText[2].setPosition(Vector2f(width / 3, height / (NR_ITEMS + 2) * 4));
+	menuText[2].setPosition(Vector2f(width / 4, height / (NR_ITEMS + 4) *4 ));
 	menuText[2].setString("Exit");
 
 	selectItem = -1;
