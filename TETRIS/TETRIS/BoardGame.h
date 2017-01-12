@@ -106,11 +106,11 @@ public:
 
 
 
-	void destroyFullLines(int &score, int &line,int &ok2)
+	void destroyFullLines(int &score, int &line, int &ok2)
 	{
 		int x;
 		int y;
-	  
+		
 
 		for (y = 0; y < BOARD_GAME_HEIGHT; y++)
 		{
@@ -129,7 +129,7 @@ public:
 			{
 				line++;
 				score = score + 100;
-			    
+			
 
 				int x;
 				for (x = 0; x < BOARD_GAME_WIDTH; x++)
