@@ -94,7 +94,7 @@ public:
 	}
 
 
-	void matrixBoarG(int matrixBG[4][4])
+	void matrixBoardG(int matrixBG[4][4])
 	{
 
 		int i;

@@ -45,10 +45,10 @@ int main()
 	Texture tgameOver;
 	Texture tinstructions;
 
-	tbackground.loadFromFile("BackMenu.png");
-	tbackgroundBoardGame.loadFromFile("Backboardgamescore.png");
-	tgameOver.loadFromFile("GameOver.png");
-	tinstructions.loadFromFile("Instructions.png");
+	tbackground.loadFromFile("Images/BackMenu.png");
+	tbackgroundBoardGame.loadFromFile("Images/Backboardgamescore.png");
+	tgameOver.loadFromFile("Images/GameOver.png");
+	tinstructions.loadFromFile("Images/Instructions.png");
 
 	Sprite background(tbackground);
 	Sprite backgroundBoarGame(tbackgroundBoardGame);
@@ -96,11 +96,13 @@ int main()
 	bufferMove.loadFromFile("Sound/move.ogg");
 	Sound soundMove;
 	soundMove.setBuffer(bufferMove);
+	
 
 	Music musicGame;
 	musicGame.openFromFile("Sound/gamemusic.ogg");
 	musicGame.play();
-
+	musicGame.setVolume(15);
+	musicGame.setLoop(1);
 
 	SoundBuffer bufferFullLine;
 	bufferFullLine.loadFromFile("Sound/fullline.ogg");
@@ -136,10 +138,16 @@ int main()
 				//Pentru meniu---
 
 				if (windowEvent.key.code == Keyboard::Up)
+				{
 					menu.MoveUp();
+					soundMove.play();//sound
+				}
 
 				if (windowEvent.key.code == Keyboard::Down)
+				{
 					menu.MoveDown();
+					soundMove.play();//sound
+				}
 
 				if (windowEvent.key.code == Keyboard::Return)
 				{
@@ -162,7 +170,7 @@ int main()
 					boardGame.resetGame();
 					opMenu = -1;
 					GameOver = 0;
-
+					speedShapeDown = 30;
 
 					//Resetare score pe Board Game:
 
@@ -175,9 +183,6 @@ int main()
 					sLine << line;
 					lblLine.setString(sLine.str());
 
-
-
-
 				}
 
 				if (windowEvent.key.code == Keyboard::R)
@@ -188,6 +193,8 @@ int main()
 					opMenu = 1;
 					boardGame.resetGame();
 					GameOver = 0;
+					speedShapeDown = 30;
+
 
 
 					//Resetare score pe Board Game:
@@ -209,6 +216,7 @@ int main()
 				if (windowEvent.key.code == Keyboard::RControl)
 				{
 					ShapesFunction shp = shapesFunction;
+					soundMove.play();//sound
 					shapesFunction.rotateShape();
 					if (boardGame.Collision(shapesFunction) != 0)
 						shapesFunction = shp;
@@ -277,12 +285,12 @@ int main()
 				score = s;
 				if (score >= 0)
 					speedShapeDown = 30;
-				if (score >= 600)
-					speedShapeDown = 10;
+				if (score >= 500)
+					speedShapeDown = 15;
 				if (score >= 800)
-					speedShapeDown = 5;
+					speedShapeDown = 10;
 				if (score >= 1200)
-					speedShapeDown = 3;
+					speedShapeDown = 5;
 
 				sScore.str("");
 				sScore << score;
