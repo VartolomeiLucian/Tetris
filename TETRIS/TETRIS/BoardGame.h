@@ -110,7 +110,8 @@ public:
 	{
 		int x;
 		int y;
-		
+		ok2 = 0; //pentru sound
+
 
 		for (y = 0; y < BOARD_GAME_HEIGHT; y++)
 		{
@@ -129,7 +130,7 @@ public:
 			{
 				line++;
 				score = score + 100;
-			
+				ok2 = 1;
 
 				int x;
 				for (x = 0; x < BOARD_GAME_WIDTH; x++)

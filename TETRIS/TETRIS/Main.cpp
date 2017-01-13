@@ -10,7 +10,7 @@
 #include "ShapesFunction.h"
 #include "BoardGame.h"
 #include <fstream>
-
+#include "SFML/Audio.hpp"
 
 using namespace sf;
 using namespace std;
@@ -27,7 +27,7 @@ int main()
 	Menu menu(window.getSize().x, window.getSize().y);
 	BoardGame boardGame;
 	ShapesFunction shapesFunction;
-	bool GameOver = 0;
+	
 	int shapeDown = 0;
 	int opMenu = -1;
 	int colorShape = 0;
@@ -35,6 +35,7 @@ int main()
 	int colorShapeBoardGame = 0;
 	int ok = 0;
 	int speedShapeDown = 30;
+	bool GameOver = 0;
 
 
 	// Background:
@@ -85,6 +86,36 @@ int main()
 	lblLine.setPosition({ 390,265 });
 	lblLine.setFont(arial);
 	lblLine.setString(sLine.str());
+
+
+
+	//Sound----------------------------
+
+
+	SoundBuffer bufferMove;
+	bufferMove.loadFromFile("Sound/move.ogg");
+	Sound soundMove;
+	soundMove.setBuffer(bufferMove);
+
+	Music musicGame;
+	musicGame.openFromFile("Sound/gamemusic.ogg");
+	musicGame.play();
+
+
+	SoundBuffer bufferFullLine;
+	bufferFullLine.loadFromFile("Sound/fullline.ogg");
+	Sound soundFullLine;
+	soundFullLine.setBuffer(bufferFullLine);
+
+	SoundBuffer bufferHighScore;
+	bufferHighScore.loadFromFile("Sound/newhighscore.ogg");
+	Sound soundNewHigScore;
+	soundNewHigScore.setBuffer(bufferHighScore);
+
+
+	//------------------------------------------
+
+
 
 
 
@@ -186,6 +217,7 @@ int main()
 
 				if (windowEvent.key.code == Keyboard::Right)
 				{
+					soundMove.play();//sound
 
 					ShapesFunction shp = shapesFunction;
 					shapesFunction.moveShape(1, 0);
@@ -197,7 +229,8 @@ int main()
 
 				if (windowEvent.key.code == Keyboard::Left)
 				{
-				
+					soundMove.play();//sound
+
 					ShapesFunction shp = shapesFunction;
 					shapesFunction.moveShape(-1, 0);
 					if (boardGame.Collision(shapesFunction) != 0)
@@ -230,7 +263,16 @@ int main()
 				boardGame.addShape(shapesFunction, color);
 				boardGame.destroyFullLines(s, l, ok);
 
-				
+				if (GameOver == 0);
+					s = s + 10;
+			
+				if (GameOver == 1)
+					s = score;
+					
+
+				if (ok == 1)
+					soundFullLine.play();  //Sound Full Line
+
 
 				score = s;
 				if (score >= 0)
@@ -268,7 +310,11 @@ int main()
 
 			int highScore = hg;
 
-			
+			if (s > highScore)
+				soundNewHigScore.play(); //Sound for new high score
+
+
+
 			Text lblHighScore;
 			lblHighScore.setCharacterSize(30);
 			lblHighScore.setPosition({ 390,530 });

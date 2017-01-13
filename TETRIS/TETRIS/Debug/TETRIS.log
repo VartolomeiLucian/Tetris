@@ -1,8 +1,9 @@
 ﻿  Main.cpp
 e:\anul i\semestrul i 2016\tetris project\tetris\tetris\shapesfunction.h(117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\boardgame.h(160): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\boardgame.h(161): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 e:\anul i\semestrul i 2016\tetris project\tetris\tetris\main.cpp(27): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-e:\anul i\semestrul i 2016\tetris project\tetris\tetris\main.cpp(224): warning C4553: '==': operator has no effect; did you intend '='?
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\main.cpp(256): warning C4553: '==': operator has no effect; did you intend '='?
+e:\anul i\semestrul i 2016\tetris project\tetris\tetris\main.cpp(265): warning C4390: ';': empty controlled statement found; is this the intent?
   Generating Code...
   Skipping... (no relevant changes detected)
   BoardGame.cpp
